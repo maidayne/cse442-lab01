@@ -7,6 +7,12 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Button, Text, View } from 'react-native';
+import { ScrollView } from 'react-native';
+
+
+import data from './Data';
+import Square from './Square';
+import styles from "./style";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -15,14 +21,15 @@ export default function RootLayout() {
   const [number, setNumber] = useState(0);
 
   return (
-    <View style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: useColorScheme() === 'dark' ? DarkTheme.colors.background : DefaultTheme.colors.background,
-    }}>
-      <Text>{number}</Text>
+    <ScrollView style={styles.container}>
+      <Text style={{color:"black", marginTop: 50,}}>{number}</Text>
       <Button title="Increment" onPress={() => setNumber(number + 1)} />
-    </View>
+    
+    {/* question4 */}
+      {data.map((item, index) =>(
+        <Square key={item} text = {`Square ${index + 1}`} />
+      ))}
+
+    </ScrollView>
   );
 }
